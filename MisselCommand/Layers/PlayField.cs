@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
-using MisselCommand;
-using MisselCommand.Missile;
+using missileCommand;
+using missileCommand.Missile;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MisselCommand.Missile.Player;
+using missileCommand.Missile.Player;
 
-namespace MisselCommand.Layers
+namespace missileCommand.Layers
 {
     public class PlayField : ILayer
     {
@@ -20,7 +20,7 @@ namespace MisselCommand.Layers
         private MouseState _mouse;
 
         private Random rand = new Random();
-        private MisselManager _missileManager;
+        private missileManager _missileManager;
         private Lines _line;
 
         //scoreItems
@@ -78,7 +78,7 @@ namespace MisselCommand.Layers
         {
         
 
-            _missileManager = new MisselManager(Game1.game.Content);
+            _missileManager = new missileManager(Game1.game.Content);
 
             _font = Game1.game.Content.Load<SpriteFont>("font");
 
@@ -87,7 +87,7 @@ namespace MisselCommand.Layers
             _percentMultiplier = 1.0f;
             _missileBases = 3;
             _city = 6;
-            _missileManager = new MisselManager(Game1.game.Content);
+            _missileManager = new missileManager(Game1.game.Content);
          
             
             //sets up the missile bases
@@ -166,7 +166,7 @@ namespace MisselCommand.Layers
                         _city -= 1;
                         _percentMultiplier -= 0.1f;
 
-                        _buildings[i].Destruction(MisselCommand.Missile.MisselManager.GetLandScape, 30, 30);
+                        _buildings[i].Destruction(missileCommand.Missile.missileManager.GetLandScape, 30, 30);
                     }
                 }
             }
@@ -180,7 +180,7 @@ namespace MisselCommand.Layers
 
                     _missileBases -= 1;
                     _percentMultiplier -= 0.05f;
-                    _leftBase.Destruction(MisselCommand.Missile.MisselManager.GetLandScape, 40, 30);
+                    _leftBase.Destruction(missileCommand.Missile.missileManager.GetLandScape, 40, 30);
 
 
                 }
@@ -193,7 +193,7 @@ namespace MisselCommand.Layers
 
                     _missileBases -= 1;
                     _percentMultiplier -= 0.05f;
-                    _middleBase.Destruction(MisselCommand.Missile.MisselManager.GetLandScape, 30, 30);
+                    _middleBase.Destruction(missileCommand.Missile.missileManager.GetLandScape, 30, 30);
 
 
                 }
@@ -206,7 +206,7 @@ namespace MisselCommand.Layers
 
                     _missileBases -= 1;
                     _percentMultiplier -= 0.05f;
-                    _rightBase.Destruction(MisselCommand.Missile.MisselManager.GetLandScape, 30, 30);
+                    _rightBase.Destruction(missileCommand.Missile.missileManager.GetLandScape, 30, 30);
 
                 }
             }
@@ -220,7 +220,7 @@ namespace MisselCommand.Layers
                     {
                         if (_mouse.Position.Y < Game1.game.GraphicsDevice.Viewport.Height - 50)
                         {
-                            //adds a missel to the world
+                            //adds a missile to the world
                             if (_selectedArrow == 1)
                             {
                                 if (!_rightBaseCoolDown.IsOverHeated())
@@ -230,7 +230,7 @@ namespace MisselCommand.Layers
                                         _rightBaseCoolDown.AddHeat(30);
 
 
-                                        _missileManager.AddMissel(new Vector2(_rightBase.GetRectangle.Left + _rightBase.GetRectangle.Width / 2, _rightBase.GetRectangle.Bottom - 2), _mouse.Position.ToVector2(), new PlayerNormalMissel(_missileManager));
+                                        _missileManager.Addmissile(new Vector2(_rightBase.GetRectangle.Left + _rightBase.GetRectangle.Width / 2, _rightBase.GetRectangle.Bottom - 2), _mouse.Position.ToVector2(), new PlayerNormalmissile(_missileManager));
                                     }
                                 }
                             }
@@ -241,7 +241,7 @@ namespace MisselCommand.Layers
                                     if (!_middleBase.GetDeathState)
                                     {
                                         _middleBaseCoolDown.AddHeat(30);
-                                        _missileManager.AddMissel(new Vector2(_middleBase.GetRectangle.Left + _middleBase.GetRectangle.Width / 2, _middleBase.GetRectangle.Bottom - 2), _mouse.Position.ToVector2(), new PlayerNormalMissel(_missileManager));
+                                        _missileManager.Addmissile(new Vector2(_middleBase.GetRectangle.Left + _middleBase.GetRectangle.Width / 2, _middleBase.GetRectangle.Bottom - 2), _mouse.Position.ToVector2(), new PlayerNormalmissile(_missileManager));
                                     }
                                 }
                             }
@@ -254,7 +254,7 @@ namespace MisselCommand.Layers
 
                                         _leftBaseCoolDown.AddHeat(30);
 
-                                        _missileManager.AddMissel(new Vector2(_leftBase.GetRectangle.Left + _leftBase.GetRectangle.Width / 2, _leftBase.GetRectangle.Bottom - 2), _mouse.Position.ToVector2(), new PlayerNormalMissel(_missileManager));
+                                        _missileManager.Addmissile(new Vector2(_leftBase.GetRectangle.Left + _leftBase.GetRectangle.Width / 2, _leftBase.GetRectangle.Bottom - 2), _mouse.Position.ToVector2(), new PlayerNormalmissile(_missileManager));
                                     }
                                 }
                             }

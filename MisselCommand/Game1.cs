@@ -2,11 +2,11 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MisselCommand.Missile;
-using MisselCommand.Layers;
+using missileCommand.Missile;
+using missileCommand.Layers;
 using System;
 
-namespace MisselCommand
+namespace missileCommand
 {
 
     /// <summary>

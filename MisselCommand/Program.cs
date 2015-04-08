@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 #endregion
 
-namespace MisselCommand
+namespace missileCommand
 {
 #if WINDOWS || LINUX
     /// <summary>

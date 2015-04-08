@@ -1,11 +1,11 @@
-﻿using MisselCommand.Layers;
+﻿using missileCommand.Layers;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MisselCommand
+namespace missileCommand
 {
     public interface ILayer
     {

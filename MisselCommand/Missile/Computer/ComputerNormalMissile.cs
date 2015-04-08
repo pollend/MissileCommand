@@ -8,15 +8,15 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MisselCommand.Missile.Computer
+namespace missileCommand.Missile.Computer
 {
     public class ComputerNormalMissile : Missile
     {
         private Texture2D texture;
-        private MisselManager _misselManager;
-        public ComputerNormalMissile(MisselManager misselManager)
+        private missileManager _missileManager;
+        public ComputerNormalMissile(missileManager missileManager)
         {
-            _misselManager = misselManager;
+            _missileManager = missileManager;
         }
         public override void Load(Vector2 StartingPoint, Vector2 EndingPoint, ContentManager Content)
         {
@@ -32,7 +32,7 @@ namespace MisselCommand.Missile.Computer
         public override void Collision()
         {
 
-            _misselManager.AddExplosion(_location, 100, new Color(115, 155, 155, 255));
+            _missileManager.AddExplosion(_location, 100, new Color(115, 155, 155, 255));
             base.Collision();
         }
         public override void Draw(SpriteBatch SpriteBatch)

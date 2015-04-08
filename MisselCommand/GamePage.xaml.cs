@@ -12,13 +12,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
-using MisselCommand.Missile;
+using missileCommand.Missile;
 using System.Windows.Media.Imaging;
 using Microsoft.Devices;
 using System.IO;
 using System.IO.IsolatedStorage;
 
-namespace MisselCommand
+namespace missileCommand
 {
     public partial class GamePage : PhoneApplicationPage
     {
@@ -26,7 +26,7 @@ namespace MisselCommand
         GameTimer timer;
         SpriteBatch spriteBatch;
         private Random rand = new Random();
-        private MisselManager _misselManager;
+        private missileManager _missileManager;
         private Lines _line;
 
         //scoreItems
@@ -100,7 +100,7 @@ namespace MisselCommand
             _line = new Lines(contentManager);
 
             //test if the game has been restored back to its oldstate
-            if (_misselManager == null)
+            if (_missileManager == null)
             {
                 Load();
             }
@@ -126,7 +126,7 @@ namespace MisselCommand
             BorderMiddleArrow.Visibility = System.Windows.Visibility.Visible;
             BorderRightArrow.Visibility = System.Windows.Visibility.Visible;
 
-            _misselManager = new Missile.MisselManager(contentManager);
+            _missileManager = new Missile.missileManager(contentManager);
 
             CanvasGameOver.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -193,12 +193,12 @@ namespace MisselCommand
             {
                 if (!_buildings[i].GetDeathState)
                 {
-                    if (_misselManager.TestForMissileRectangleCollisions(_buildings[i].GetRectangle))
+                    if (_missileManager.TestForMissileRectangleCollisions(_buildings[i].GetRectangle))
                     {
                         _city -= 1;
                         _percentMultiplier -= 0.1f;
                         UpdateOverlay();
-                        _buildings[i].Destruction(Missile.MisselManager.GetLandScape, 30, 30);
+                        _buildings[i].Destruction(Missile.missileManager.GetLandScape, 30, 30);
                     }
                 }
             }
@@ -206,39 +206,39 @@ namespace MisselCommand
             //missile manager testcollision with buildings
             if (!_leftBase.GetDeathState)
             {
-                if (_misselManager.TestForMissileRectangleCollisions(_leftBase.GetRectangle))
+                if (_missileManager.TestForMissileRectangleCollisions(_leftBase.GetRectangle))
                 {
                     BorderLeftArrow.Visibility = System.Windows.Visibility.Collapsed;
 
                     _missilesBases -= 1;
                     _percentMultiplier -= 0.05f;
-                    _leftBase.Destruction(Missile.MisselManager.GetLandScape, 40, 30);
+                    _leftBase.Destruction(Missile.missileManager.GetLandScape, 40, 30);
 
                     UpdateOverlay();
                 }
             }
             if (!_middleBase.GetDeathState)
             {
-                if (_misselManager.TestForMissileRectangleCollisions(_middleBase.GetRectangle))
+                if (_missileManager.TestForMissileRectangleCollisions(_middleBase.GetRectangle))
                 {
                     BorderMiddleArrow.Visibility = System.Windows.Visibility.Collapsed;
 
                     _missilesBases -= 1;
                     _percentMultiplier -= 0.05f;
-                    _middleBase.Destruction(Missile.MisselManager.GetLandScape, 30, 30);
+                    _middleBase.Destruction(Missile.missileManager.GetLandScape, 30, 30);
 
                     UpdateOverlay();
                 }
             }
             if (!_rightBase.GetDeathState)
             {
-                if (_misselManager.TestForMissileRectangleCollisions(_rightBase.GetRectangle))
+                if (_missileManager.TestForMissileRectangleCollisions(_rightBase.GetRectangle))
                 {
                     BorderRightArrow.Visibility = System.Windows.Visibility.Collapsed;
 
                     _missilesBases -= 1;
                     _percentMultiplier -= 0.05f;
-                    _rightBase.Destruction(Missile.MisselManager.GetLandScape, 30, 30);
+                    _rightBase.Destruction(Missile.missileManager.GetLandScape, 30, 30);
                     UpdateOverlay();
                 }
             }
@@ -253,7 +253,7 @@ namespace MisselCommand
                     {
                         if (tl.Position.Y < HEIGHT - 50)
                         {
-                            //adds a missel to the world
+                            //adds a missile to the world
                             if (_selectedArrow == 1)
                             {
                                 if (!_rightBaseCoolDown.IsOverHeated())
@@ -261,7 +261,7 @@ namespace MisselCommand
                                     if (!_rightBase.GetDeathState)
                                     {
                                         _rightBaseCoolDown.AddHeat(30);
-                                        Missile.MisselManager.AddMissel(new Vector2(_rightBase.GetRectangle.Left + _rightBase.GetRectangle.Width / 2, _rightBase.GetRectangle.Bottom - 2), tl.Position, new Missile.Player.PlayerNormalMissel());
+                                        Missile.missileManager.Addmissile(new Vector2(_rightBase.GetRectangle.Left + _rightBase.GetRectangle.Width / 2, _rightBase.GetRectangle.Bottom - 2), tl.Position, new Missile.Player.PlayerNormalmissile());
                                     }
                                 }
                             }
@@ -272,7 +272,7 @@ namespace MisselCommand
                                     if (!_middleBase.GetDeathState)
                                     {
                                         _middleBaseCoolDown.AddHeat(30);
-                                        Missile.MisselManager.AddMissel(new Vector2(_middleBase.GetRectangle.Left + _middleBase.GetRectangle.Width / 2, _middleBase.GetRectangle.Bottom - 2), tl.Position, new Missile.Player.PlayerNormalMissel());
+                                        Missile.missileManager.Addmissile(new Vector2(_middleBase.GetRectangle.Left + _middleBase.GetRectangle.Width / 2, _middleBase.GetRectangle.Bottom - 2), tl.Position, new Missile.Player.PlayerNormalmissile());
                                     }
                                 }
                             }
@@ -284,7 +284,7 @@ namespace MisselCommand
                                     {
 
                                         _leftBaseCoolDown.AddHeat(30);
-                                        Missile.MisselManager.AddMissel(new Vector2(_leftBase.GetRectangle.Left + _leftBase.GetRectangle.Width / 2, _leftBase.GetRectangle.Bottom - 2), tl.Position, new Missile.Player.PlayerNormalMissel());
+                                        Missile.missileManager.Addmissile(new Vector2(_leftBase.GetRectangle.Left + _leftBase.GetRectangle.Width / 2, _leftBase.GetRectangle.Bottom - 2), tl.Position, new Missile.Player.PlayerNormalmissile());
                                     }
                                 }
                             }
@@ -295,7 +295,7 @@ namespace MisselCommand
             }
             _line.Update();
             // TODO: Add your update logic here
-            _misselManager.Update();
+            _missileManager.Update();
 
             if (_oldScore != _score)
             {
@@ -318,7 +318,7 @@ namespace MisselCommand
             spriteBatch.Begin();
 
             _line.Draw(spriteBatch);
-            _misselManager.Draw(spriteBatch, SharedGraphicsDeviceManager.Current.GraphicsDevice);
+            _missileManager.Draw(spriteBatch, SharedGraphicsDeviceManager.Current.GraphicsDevice);
 
 
             for (int i = 0; i < _buildings.Length; i++)

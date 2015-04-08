@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace MisselCommand.Layers
+namespace missileCommand.Layers
 {
     public class LayerManager
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MisselCommand.Layers
+namespace missileCommand.Layers
 {
     public class PlayerGui : ILayer
     {

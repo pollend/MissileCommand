@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Windows.Threading;
 
-namespace MisselCommand.Missile
+namespace missileCommand.Missile
 {
     public class Missile
     {
@@ -57,13 +57,13 @@ namespace MisselCommand.Missile
           
            //_arrivalTime = (Vector2.Distance(_startingPoint, _endingPoint) / _velocity);
            _arrivialTime.Interval = new TimeSpan(0, 0, 0, 0, (int)((Vector2.Distance(_startingPoint, _endingPoint) / _velocity)*16));
-           _arrivialTime.Tick += new EventHandler(MisselArrived);
+           _arrivialTime.Tick += new EventHandler(missileArrived);
            _arrivialTime.Start();
 
             //adds a starting line
            Lines.AddLine(this._oldLocation, _location);
             //sets up a timer to tell when a missile will put down a line
-           _timeBetweenLines.Interval = new TimeSpan(0, 0, 0, 1,0);
+           _timeBetweenLines.Interval = new TimeSpan(0, 0, 0, 0,200);
            _timeBetweenLines.Tick += new EventHandler(_TimeBetweenLineDraw);
            _timeBetweenLines.Start();
            
@@ -76,7 +76,7 @@ namespace MisselCommand.Missile
             _oldLocation = _location;
         }
 
-        void MisselArrived(object sender, EventArgs e)
+        void missileArrived(object sender, EventArgs e)
         {
             _dead = true;
             _arrivialTime.Stop();

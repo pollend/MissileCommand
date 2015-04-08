@@ -7,18 +7,18 @@ using System.Windows.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using MisselCommand.Missile;
+using missileCommand.Missile;
 
-namespace MisselCommand.Missile.Player
+namespace missileCommand.Missile.Player
 {
-    public class PlayerNormalMissel : Missile
+    public class PlayerNormalmissile : Missile
     {
         private Random _rand;
         Texture2D texture;
-        MisselManager _misselManager;
-        public PlayerNormalMissel(MisselManager manager)
+        missileManager _missileManager;
+        public PlayerNormalmissile(missileManager manager)
         {
-            _misselManager = manager;
+            _missileManager = manager;
         }
         public override void Load(Vector2 StartingPoint, Vector2 EndingPoint, ContentManager Content)
         {
@@ -33,7 +33,7 @@ namespace MisselCommand.Missile.Player
         }
         public override void Collision()
         {
-            _misselManager.AddExplosion(_location, 200, new Color(115, 155, 155, 255));
+            _missileManager.AddExplosion(_location, 200, new Color(115, 155, 155, 255));
             base.Collision();
         }
         public override void Draw(SpriteBatch SpriteBatch)

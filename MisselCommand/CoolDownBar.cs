@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
-using MisselCommand.Missile;
+using missileCommand.Missile;
 using System.Windows.Threading;
 
-namespace MisselCommand
+namespace missileCommand
 {
     public class CoolDownBar
     {

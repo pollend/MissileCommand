@@ -8,13 +8,13 @@ using System.Windows.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using MisselCommand.Missile;
-using MisselCommand.Layers;
+using missileCommand.Missile;
+using missileCommand.Layers;
 
 
-namespace MisselCommand.Missile
+namespace missileCommand.Missile
 {
-    public class MisselManager
+    public class missileManager
     {
         //the grid with the texture to present
         private static Grid _landScapeGrid;
@@ -23,8 +23,8 @@ namespace MisselCommand.Missile
         //explosion
         private LinkedList<Explosion> _explosion = new LinkedList<Explosion>();
         private List<Explosion> _explosionToRemove = new List<Explosion>();
-        //missels
-        private LinkedList<Missile> _missel = new LinkedList<Missile>();
+        //missiles
+        private LinkedList<Missile> _missile = new LinkedList<Missile>();
         private List<Missile> _missilesToRemove = new List<Missile>();
 
        
@@ -36,10 +36,10 @@ namespace MisselCommand.Missile
             get { return _landScapeGrid; }
         }
 
-        public MisselManager(ContentManager content)
+        public missileManager(ContentManager content)
         {
             _explosion = new LinkedList<Explosion>();
-            _missel = new LinkedList<Missile>();
+            _missile = new LinkedList<Missile>();
             _missilesToRemove = new List<Missile>();
             _explosionToRemove = new List<Explosion>();
 
@@ -48,11 +48,11 @@ namespace MisselCommand.Missile
 
             _content = content;
         }
-        public void AddMissel(Vector2 start, Vector2 end,Missile type)
+        public void Addmissile(Vector2 start, Vector2 end,Missile type)
         {
-            Missile missel = type;
-            missel.Load(start, end, _content);
-            _missel.AddLast(missel);
+            Missile missile = type;
+            missile.Load(start, end, _content);
+            _missile.AddLast(missile);
         }
         public void AddExplosion(Vector2 location, float maxwidth, Color clr)
         {
@@ -64,7 +64,7 @@ namespace MisselCommand.Missile
         /// </summary>
         public bool TestForMissileRectangleCollisions(Microsoft.Xna.Framework.Rectangle rect)
         {
-            foreach (Missile m in _missel)
+            foreach (Missile m in _missile)
             {
                 if (!m.GetFriendlyState)
                 {
@@ -85,7 +85,7 @@ namespace MisselCommand.Missile
         public void Update(PlayField field)
         {
 
-            foreach (Missile m in _missel)
+            foreach (Missile m in _missile)
             {
                 m.Update();
                 if (m.DeathState)
@@ -132,7 +132,7 @@ namespace MisselCommand.Missile
             for (int i = 0; i < _missilesToRemove.Count; i++)
             {
                 _missilesToRemove[i].Collision();
-                _missel.Remove(_missilesToRemove[i]);
+                _missile.Remove(_missilesToRemove[i]);
             }
             for (int i = 0; i < _explosionToRemove.Count; i++)
             {
@@ -149,7 +149,7 @@ namespace MisselCommand.Missile
         public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphicsDevice)
         {
             _landScapeGrid.GetTexture(graphicsDevice, spriteBatch);
-            foreach (Missile m in _missel)
+            foreach (Missile m in _missile)
             {
                 m.Draw(spriteBatch);
             }

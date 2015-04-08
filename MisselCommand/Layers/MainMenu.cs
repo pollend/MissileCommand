@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MisselCommand.Layers
+namespace missileCommand.Layers
 {
     public class MainMenu : ILayer
     {
         private SpriteFont _font;
+        private Texture2D _title;
 
         public string layerId()
         {
@@ -20,6 +21,7 @@ namespace MisselCommand.Layers
         public void load(ContentManager content)
         {
             _font = Game1.game.Content.Load<SpriteFont>("font");
+            _title = Game1.game.Content.Load<Texture2D>("COMMAND");
         }
 
         public void update(LayerManager layerManager)

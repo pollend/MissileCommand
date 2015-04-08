@@ -7,37 +7,37 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
-using MisselCommand.Missile;
+using missileCommand.Missile;
 using System.Threading;
 using System.Windows.Threading;
-using MisselCommand.Missile.Computer;
+using missileCommand.Missile.Computer;
 
-namespace MisselCommand
+namespace missileCommand
 {
     public class MissileSpawningAI
     {
 
-        private DispatcherTimer _spawnNormalMissels = new DispatcherTimer();
+        private DispatcherTimer _spawnNormalmissiles = new DispatcherTimer();
         private Random rand = new Random();
         private int maxMillisecondsSpanMissile = 5000;
-        public MisselManager _misselManager;
-        public MissileSpawningAI(MisselManager misselManager)
+        public missileManager _missileManager;
+        public MissileSpawningAI(missileManager missileManager)
         {
-            _misselManager = misselManager;
+            _missileManager = missileManager;
             maxMillisecondsSpanMissile = 6000;
-            _spawnNormalMissels.Interval = new TimeSpan(0, 0, 0, 0, 5000);
-            _spawnNormalMissels.Tick += new EventHandler(_spawnNormalMissels_Tick);
-            _spawnNormalMissels.Start();
+            _spawnNormalmissiles.Interval = new TimeSpan(0, 0, 0, 0, 5000);
+            _spawnNormalmissiles.Tick += new EventHandler(_spawnNormalmissiles_Tick);
+            _spawnNormalmissiles.Start();
         }
 
-        void _spawnNormalMissels_Tick(object sender, EventArgs e)
+        void _spawnNormalmissiles_Tick(object sender, EventArgs e)
         {
 
-            _misselManager.AddMissel(new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), 0), new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), Game1.game.GraphicsDevice.Viewport.Height), new ComputerNormalMissile(_misselManager));
+            _missileManager.Addmissile(new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), 0), new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), Game1.game.GraphicsDevice.Viewport.Height), new ComputerNormalMissile(_missileManager));
             if (maxMillisecondsSpanMissile <= 1000)
             {
                 maxMillisecondsSpanMissile -= 100;
-                _spawnNormalMissels.Interval = new TimeSpan(0, 0, 0, 0, rand.Next(1000, maxMillisecondsSpanMissile));
+                _spawnNormalmissiles.Interval = new TimeSpan(0, 0, 0, 0, rand.Next(1000, maxMillisecondsSpanMissile));
             }
             if (maxMillisecondsSpanMissile < 1000)
             {

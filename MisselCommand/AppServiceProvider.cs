@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MisselCommand
+namespace missileCommand
 {
     /// <summary>
     /// Implements IServiceProvider for the application. This type is exposed through the App.Services

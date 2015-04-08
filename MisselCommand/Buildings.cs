@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Runtime.Serialization;
-using MisselCommand.Missile;
+using missileCommand.Missile;
 
 
-namespace MisselCommand
+namespace missileCommand
 {
 
     public class Buildings
@@ -20,10 +20,10 @@ namespace MisselCommand
         private Rectangle _rect;
         private Random _rand;
         private bool _dead = false;
-        private MisselManager _misselManager;
-        public Buildings(Rectangle rect, Texture2D texture,MisselManager misselManager)
+        private missileManager _missileManager;
+        public Buildings(Rectangle rect, Texture2D texture,missileManager missileManager)
         {
-            _misselManager = misselManager;
+            _missileManager = missileManager;
             _rand = new Random(System.DateTime.Now.Millisecond);
             _rect = rect;
             _buildingTexture = texture;
@@ -54,7 +54,7 @@ namespace MisselCommand
         {
             for (int i = 0; i < amountOfExplosions; i++)
 			{
-                _misselManager.AddExplosion(new Vector2(_rand.Next(_rect.Left, _rect.Right), _rand.Next(_rect.Top, _rect.Bottom)), 50 + _rand.Next(0, 50), new Color(115, 30, 30, 30));
+                _missileManager.AddExplosion(new Vector2(_rand.Next(_rect.Left, _rect.Right), _rand.Next(_rect.Top, _rect.Bottom)), 50 + _rand.Next(0, 50), new Color(115, 30, 30, 30));
 			}
             for (int i = 0; i < TerrainDestruction; i++)
 			{

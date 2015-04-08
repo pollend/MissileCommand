@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MisselCommand.Layers
+namespace missileCommand.Layers
 {
-    public class GameOver : MisselCommand.ILayer
+    public class GameOver : missileCommand.ILayer
     {
         private SpriteFont _font;
         private int _score;
@@ -26,7 +26,7 @@ namespace MisselCommand.Layers
             _font = Game1.game.Content.Load<SpriteFont>("font");
         }
 
-        public void update(MisselCommand.Layers.LayerManager layerManager)
+        public void update(missileCommand.Layers.LayerManager layerManager)
         {
            if(layerManager.keyboard.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
            {

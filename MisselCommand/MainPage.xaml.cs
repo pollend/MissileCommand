@@ -17,13 +17,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
-using MisselCommand.Missile;
+using missileCommand.Missile;
 using System.IO;
 using System.IO.IsolatedStorage;
 
 
 
-namespace MisselCommand
+namespace missileCommand
 {
     public partial class MainPage : PhoneApplicationPage
     {
@@ -33,7 +33,7 @@ namespace MisselCommand
         SpriteBatch spriteBatch;
 
         private Random rand = new Random();
-        private MisselManager _misselManager;
+        private missileManager _missileManager;
     
 
         private Lines _line;
@@ -85,7 +85,7 @@ namespace MisselCommand
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(SharedGraphicsDeviceManager.Current.GraphicsDevice);
 
-            _misselManager = new Missile.MisselManager(contentManager);
+            _missileManager = new Missile.missileManager(contentManager);
             _line = new Lines(contentManager);
 
             _uiRender = new UIElementRenderer(this, 800, 480);
@@ -111,13 +111,13 @@ namespace MisselCommand
 
         private void OnUpdate(object sender, GameTimerEventArgs e)
         {
-            _misselManager.Update();
+            _missileManager.Update();
       
             _line.Update();
             if (rand.Next(0, 1000) < 100)
             {
 
-                Missile.MisselManager.AddMissel(new Vector2(rand.Next(0, 800), 0), new Vector2(rand.Next(0, 800), 480), new Missile.Computer.ComputerNormalMissile());
+                Missile.missileManager.Addmissile(new Vector2(rand.Next(0, 800), 0), new Vector2(rand.Next(0, 800), 480), new Missile.Computer.ComputerNormalMissile());
             }
         }
 
@@ -130,7 +130,7 @@ namespace MisselCommand
 
             _uiRender.Render();
             spriteBatch.Begin();
-            _misselManager.Draw(spriteBatch, SharedGraphicsDeviceManager.Current.GraphicsDevice);
+            _missileManager.Draw(spriteBatch, SharedGraphicsDeviceManager.Current.GraphicsDevice);
             _line.Draw(spriteBatch);
             spriteBatch.Draw(_uiRender.Texture, Vector2.Zero, Microsoft.Xna.Framework.Color.White);
             spriteBatch.End();
