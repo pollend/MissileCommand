@@ -32,10 +32,13 @@ namespace MisselCommand
 
         void _spawnNormalMissels_Tick(object sender, EventArgs e)
         {
-            maxMillisecondsSpanMissile -= 5;
 
             _misselManager.AddMissel(new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), 0), new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), Game1.game.GraphicsDevice.Viewport.Height), new ComputerNormalMissile(_misselManager));
-            _spawnNormalMissels.Interval = new TimeSpan(0, 0, 0, 0, rand.Next(1000, maxMillisecondsSpanMissile));
+            if (maxMillisecondsSpanMissile <= 1000)
+            {
+                maxMillisecondsSpanMissile -= 100;
+                _spawnNormalMissels.Interval = new TimeSpan(0, 0, 0, 0, rand.Next(1000, maxMillisecondsSpanMissile));
+            }
             if (maxMillisecondsSpanMissile < 1000)
             {
                 maxMillisecondsSpanMissile = 1000;

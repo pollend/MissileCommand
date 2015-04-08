@@ -5,12 +5,9 @@ using Microsoft.Xna.Framework.Input;
 using MisselCommand.Missile;
 using MisselCommand.Layers;
 using System;
-using MisselCommand.Layers;
 
 namespace MisselCommand
 {
-
-
 
     /// <summary>
     /// This is the main type for your game
@@ -58,6 +55,7 @@ namespace MisselCommand
             spriteBatch = new SpriteBatch(GraphicsDevice);
             _layerManager = new LayerManager(Content);
             _layerManager.addLayer(new PlayField(false));
+            _layerManager.addLayer(new MainMenu());
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,9 +68,6 @@ namespace MisselCommand
         {
             // TODO: Unload any non ContentManager content here
         }
-
-
-     
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,

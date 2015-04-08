@@ -42,6 +42,7 @@
     <Compile Include="AppServiceProvider.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="Buildings.cs" />
+    <Compile Include="Button.cs" />
     <Compile Include="CoolDownBar.cs" />
     <Compile Include="Game1.cs" />
     <None Include="GamePage.xaml.cs" />

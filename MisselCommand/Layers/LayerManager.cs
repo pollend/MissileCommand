@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,13 @@ namespace MisselCommand.Layers
 {
     public class LayerManager
     {
+        private MouseState _mouse = new MouseState();
+        private KeyboardState _keyboardState = new KeyboardState();
         private LinkedList<ILayer> _layers = new LinkedList<ILayer>();
         private ContentManager _content;
+
+        public MouseState mouse { get { return _mouse; } }
+        public KeyboardState keyboard { get { return _keyboardState; } }
 
         public LayerManager(ContentManager content)
         {
@@ -21,59 +27,56 @@ namespace MisselCommand.Layers
         {
             ILayer llayer = (ILayer)layer;
             llayer.load(_content);
-            lock (_layers)
-            {
-                _layers.AddLast(llayer);
-            }
+            _layers.AddLast(llayer);
+        }
+
+        public void clearLayers()
+        {
+            _layers.Clear();
         }
 
         public void popLayer()
         {
-            lock (_layers)
-            {
-                _layers.RemoveLast();
-            }
+           _layers.RemoveLast();
         }
 
         public ILayer getLayerById(String id)
         {
-            lock (_layers)
+            LinkedListNode<ILayer> llayer = _layers.Last;
+            while (llayer != null)
             {
-                LinkedListNode<ILayer> llayer = _layers.Last;
-                while (llayer != null)
-                {
-                    if (llayer.Value.layerId() == id)
-                        return llayer.Value;
-                    llayer = llayer.Previous;
-                }
+                if (llayer.Value.layerId() == id)
+                    return llayer.Value;
+                llayer = llayer.Previous;
             }
             return null;
         }
 
         public void update()
         {
-            lock (_layers)
+            _mouse = Mouse.GetState();
+            _keyboardState = Keyboard.GetState();
+  
+            LinkedListNode<ILayer> llayer = _layers.Last;
+            while (llayer != null)
             {
-                LinkedListNode<ILayer> llayer = _layers.Last;
-                while (llayer != null)
-                {
-                    llayer.Value.update(this);
-                    llayer = llayer.Previous;
-                }
+                llayer.Value.update(this);
+                llayer = llayer.Previous;
             }
+
+
+
         }
 
         public void draw()
         {
-            lock (_layers)
+            LinkedListNode<ILayer> llayer = _layers.First;
+            while (llayer != null)
             {
-                LinkedListNode<ILayer> llayer = _layers.Last;
-                while (llayer != null)
-                {
-                    llayer.Value.draw();
-                    llayer = llayer.Previous;
-                }
+                llayer.Value.draw();
+                llayer = llayer.Next;
             }
+            
         }
 
     }
