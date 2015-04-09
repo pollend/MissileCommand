@@ -112,10 +112,8 @@ namespace missileCommand.Missile
                 {
                     if (_landScapeGrid.CollisionCheck(m.GetLocation))
                     {
-
-     
                         m.DeathState = true;
-                        _landScapeGrid.ImpactPosion(m.GetLocation,10, 300);
+                        _landScapeGrid.ImpactPosion(m.GetLocation,10);
                     }
 
                 }
@@ -140,6 +138,7 @@ namespace missileCommand.Missile
             }
             _missilesToRemove.Clear();
             _explosionToRemove.Clear();
+            _landScapeGrid.update();
         }
         /// <summary>
         /// draws the textures of the missiles and landscape

@@ -54,11 +54,11 @@ namespace missileCommand
         {
             for (int i = 0; i < amountOfExplosions; i++)
 			{
-                _missileManager.AddExplosion(new Vector2(_rand.Next(_rect.Left, _rect.Right), _rand.Next(_rect.Top, _rect.Bottom)), 50 + _rand.Next(0, 50), new Color(115, 30, 30, 30));
+                _missileManager.AddExplosion(new Vector2(_rand.Next(_rect.Left, _rect.Right), _rand.Next(_rect.Top, _rect.Bottom)), 50 + _rand.Next(0, 200), new Color(115, 30, 30, 30));
 			}
             for (int i = 0; i < TerrainDestruction; i++)
 			{
-                grid.ImpactPosion(new Vector2(_rand.Next(_rect.Left-10, _rect.Right+10), _rand.Next(_rect.Bottom-10, _rect.Bottom + 10)), 10, 100);
+                grid.ImpactPosion(new Vector2(_rand.Next(_rect.Left-10, _rect.Right+10), _rand.Next(_rect.Bottom-10, _rect.Bottom + 10)), 10);
              
 			}
             _dead = true;

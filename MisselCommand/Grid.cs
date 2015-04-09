@@ -13,12 +13,15 @@ namespace missileCommand
 {
     public class Grid
     {
+         
+
+     
         private Color[] _color;
         private int _width;
         private int _height;
         private Vector2 _location;
         private Random _rand;
-        private Texture2D _texture; 
+        private Texture2D _texture;
 
         public Grid(Texture2D texture, Vector2 location)
         {
@@ -34,6 +37,7 @@ namespace missileCommand
             _height = texture.Height;
             _location = location;
 
+
     
         }
         private int _getLocationOnArray(int x, int y)
@@ -47,44 +51,61 @@ namespace missileCommand
             return -1;
             
         }
-        public void ImpactPosion(Vector2 Location, int radius, int amount)
+        public void ImpactPosion(Vector2 Location, int radius)
         {
         
                 int locationOnArray = _getLocationOnArray((int)(Location.X - _location.X), (int)(Location.Y - _location.Y));
-                if (locationOnArray >= 0)
+                for (int x = ((int)Location.X) - radius; x < ((int)Location.X) + radius; x++ )
                 {
-                    for (int i = 0; i < amount; i++)
+                    for (int y = ((int)Location.Y) - radius; y < ((int)Location.Y) + radius; y++)
                     {
-                        int CircleLocation = _rand.Next(0, 7);
-                        locationOnArray = _getLocationOnArray((int)((Location.X - _location.X) + (Math.Cos(CircleLocation) * _rand.Next(0, radius))), (int)((Location.Y - _location.Y) + (Math.Sin(CircleLocation) * _rand.Next(0, radius))));
-                        if (locationOnArray >= 0)
-                        {
-                            _color[locationOnArray] = new Color(0, 0, 0, 0);
-                        }
+
+                            Vector2 lrelativeLocation = new Vector2(x - _location.X, y - _location.Y);
+                            if (new Vector2((float)x - Location.X, (float)y - Location.Y).Length() < radius)
+                            {
+                                int llocation = _getLocationOnArray((int)(lrelativeLocation.X), (int)(lrelativeLocation.Y));
+                                if(llocation != -1)
+                                {
+                                   
+                                    _color[llocation] = new Color(0, 0, 0, 0);
+                                   
+                                }
+                            }
+                        
                     }
+
                 }
+
         }
         public  bool CollisionCheck(Vector2 Location)
         {
             int locationOnArray = _getLocationOnArray((int)(Location.X - _location.X), (int)(Location.Y - _location.Y));
-            if (locationOnArray >= 0)
+            if (locationOnArray != -1)
             {
-                if (_color[_getLocationOnArray((int)(Location.X - _location.X), (int)(Location.Y - _location.Y))].A > 0)
+                if (_color[locationOnArray].A > 5)
                 {
                     return true;
                 }
             }
             return false;
         }
+
+        public void update()
+        {
+
+        }
         public void GetTexture(GraphicsDevice GraphicsDevice, SpriteBatch sprites)
         {
-            GraphicsDevice.Textures[0] = null;
+      
+            // GraphicsDevice.Textures[0] = null;
             if (_texture == null)
             {
                 _texture = new Texture2D(GraphicsDevice, _width, _height);
             }
             _texture.SetData(_color);
             sprites.Draw(_texture, _location, Color.White);
+
+      
         }
     }
 }

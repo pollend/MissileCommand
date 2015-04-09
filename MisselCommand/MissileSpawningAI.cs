@@ -18,31 +18,40 @@ namespace missileCommand
     {
 
         private DispatcherTimer _spawnNormalmissiles = new DispatcherTimer();
+        private DispatcherTimer _difficulty = new DispatcherTimer();
         private Random rand = new Random();
         private int maxMillisecondsSpanMissile = 5000;
         public missileManager _missileManager;
         public MissileSpawningAI(missileManager missileManager)
         {
             _missileManager = missileManager;
-            maxMillisecondsSpanMissile = 6000;
+            maxMillisecondsSpanMissile = 5000;
+
+            _difficulty.Interval = new TimeSpan(0, 0, 1);
+            _spawnNormalmissiles.Tick += new EventHandler(_difficultyTick);
+            _spawnNormalmissiles.Start();
+
             _spawnNormalmissiles.Interval = new TimeSpan(0, 0, 0, 0, 5000);
             _spawnNormalmissiles.Tick += new EventHandler(_spawnNormalmissiles_Tick);
             _spawnNormalmissiles.Start();
         }
-
-        void _spawnNormalmissiles_Tick(object sender, EventArgs e)
+        private void _spawnNormalmissiles_Tick(object sender, EventArgs e)
         {
+            System.Console.WriteLine(maxMillisecondsSpanMissile);
+            _missileManager.Addmissile(new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), 0), new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), Game1.game.GraphicsDevice.Viewport.Height + 20), new ComputerNormalMissile(_missileManager));
+            _spawnNormalmissiles.Interval = new TimeSpan(0, 0, 0, 0, rand.Next(200, maxMillisecondsSpanMissile));
+        }
 
-            _missileManager.Addmissile(new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), 0), new Vector2(rand.Next(0, Game1.game.GraphicsDevice.Viewport.Width), Game1.game.GraphicsDevice.Viewport.Height), new ComputerNormalMissile(_missileManager));
-            if (maxMillisecondsSpanMissile <= 1000)
+        private void _difficultyTick(object sender, EventArgs e)
+        {
+            if (maxMillisecondsSpanMissile >= 200)
             {
-                maxMillisecondsSpanMissile -= 100;
-                _spawnNormalmissiles.Interval = new TimeSpan(0, 0, 0, 0, rand.Next(1000, maxMillisecondsSpanMissile));
+                maxMillisecondsSpanMissile -= 20;
             }
-            if (maxMillisecondsSpanMissile < 1000)
-            {
-                maxMillisecondsSpanMissile = 1000;
-            }
+            else
+                maxMillisecondsSpanMissile = 300;
+
+
         }
     }
 }
